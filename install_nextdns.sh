@@ -1,24 +1,22 @@
 #!/bin/bash
 
-# Script to install and configure NextDNS for iCode
+echo "Installing NextDNS..."
 
 # Install NextDNS
-echo "Installing NextDNS..."
-brew install nextdns
+brew install nextdns/tap/nextdns
 
 # Check if installation was successful
-if ! command -v nextdns >/dev/null 2>&1; then
-    echo "NextDNS installation failed."
-    exit 1
+if command -v nextdns >/dev/null 2>&1; then
+    echo "NextDNS installed successfully."
+
+    # Configure NextDNS for a workstation
+    echo "Configuring NextDNS..."
+    sudo nextdns install \
+      -config a55db9 \ # Replace with your actual config ID
+      -report-client-info \
+      -auto-activate
+
+    echo "NextDNS configured successfully."
+else
+    echo "Error: NextDNS installation failed."
 fi
-
-echo "NextDNS installed successfully."
-
-# Configure NextDNS with iCode profile
-echo "Configuring NextDNS with iCode profile..."
-nextdns install -config a55db9
-
-# Validate configuration
-echo "NextDNS configuration complete."
-
-# Optional: Add additional configuration or checks as needed
