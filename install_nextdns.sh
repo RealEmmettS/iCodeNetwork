@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Installing NextDNS..."
+echo "Starting the installation of NextDNS..."
 
 # Install NextDNS
 brew install nextdns/tap/nextdns
@@ -16,7 +16,13 @@ if command -v nextdns >/dev/null 2>&1; then
       -report-client-info \
       -auto-activate
 
-    echo "NextDNS configured successfully."
+    echo "NextDNS configuration complete."
+
+    # Check NextDNS status
+    echo "Checking NextDNS status..."
+    sudo nextdns status
+
 else
     echo "Error: NextDNS installation failed."
 fi
+echo "Installation complete."
